@@ -8,6 +8,8 @@
 
 #import "SwitchCell.h"
 
+
+
 @implementation SwitchCell
 
 - (void)awakeFromNib {
@@ -18,6 +20,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (IBAction)onValueChanged:(UISwitch *)sender {
+    NSLog(@"Cell value changed");
+    [self.delegate switchCell:self valueDidChange:sender.on];
 }
 
 @end

@@ -7,8 +7,11 @@
 //
 
 #import "MainViewController.h"
+#import "FiltersViewController.h"
 
 @interface MainViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *myLabel;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
 
@@ -16,6 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.myLabel.text = @"This is something really really long and not cool";
+    self.myTableView.rowHeight = UITableViewAutomaticDimension;
+    self.myTableView.estimatedRowHeight = 60;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        NSLog(@"App became active");
+    }];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -33,5 +43,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)onFiltersTapped:(id)sender {
+    FiltersViewController *vc = [[FiltersViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nvc animated:YES completion:nil];
+}
 
 @end
